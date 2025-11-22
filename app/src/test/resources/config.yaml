@@ -1,0 +1,23 @@
+  activeProfile: "${APP_PROFILE:dev}"
+
+  profiles:
+    dev:
+      baseUrl: "https://thinking-tester-contact-list.herokuapp.com"
+      timeout: 5000
+      logRequests: true
+      auth:
+        token: "${DEV_TOKEN}"
+
+    test:
+      baseUrl: "https://thinking-tester-contact-list.herokuapp.com"
+      timeout: 7000
+      logRequests: true
+      auth:
+        token: "${TEST_TOKEN}"
+
+    prod:
+      baseUrl: "https://thinking-tester-contact-list.herokuapp.com"
+      timeout: 10000
+      logRequests: false
+      auth:
+        token: "${PROD_TOKEN}"
