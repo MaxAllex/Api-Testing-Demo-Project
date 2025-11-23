@@ -15,6 +15,7 @@ public class Users {
 
     public String getAuthToken(LogInUser user) {
         return given()
+                .spec(spec)
                 .baseUri(Config.getBaseUrl())
                 .body(user)
                 .when()
