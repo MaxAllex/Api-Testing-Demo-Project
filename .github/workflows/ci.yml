@@ -25,10 +25,6 @@ jobs:
     - name: Run tests
       run: ./gradlew test
     
-    - name: Generate Allure Report
-      if: always()
-      run: ./gradlew allureReport
-    
     - name: Publish Allure Report
       if: always()
       uses: simple-elf/allure-report-action@master
