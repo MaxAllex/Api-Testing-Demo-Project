@@ -1,8 +1,10 @@
 package demo.api.testdata.generators;
 
+import java.time.ZoneId;
+
 import com.github.javafaker.Faker;
 
-import demo.api.dto.Contact;
+import demo.api.dto.Contacts.request.Contact;
 
 public class ContactGenerator {
     private static final Faker faker = new Faker();
@@ -11,9 +13,9 @@ public class ContactGenerator {
         return new Contact(
             faker.name().firstName(),
             faker.name().lastName(),
-            faker.date().birthday(),
+            faker.date().birthday().toInstant().atZone(ZoneId.of("UTC")).toLocalDate().toString(),
             faker.internet().emailAddress(),
-            faker.phoneNumber().phoneNumber(),
+            faker.phoneNumber().cellPhone().replaceAll("(?!\\+)\\D", ""),
             faker.address().streetAddress(),
             faker.address().secondaryAddress(),
             faker.address().city(),

@@ -6,13 +6,17 @@
       timeout: 5000
       logRequests: true
       auth:
-        token: "${DEV_TOKEN}"
+        login: "${DEV_USER:dev_user}"
+        password: "${DEV_PASSWORD:dev_password}"
+        token: "${DEV_TOKEN:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTIxZWVkMTFmYjM2MTAwMTViNTJmZGUiLCJpYXQiOjE3NjM5MDI4ODd9.FnPYgXy4_wi1Ei8sAMiuALPsQSwbVyO3euFzP-BOa1Q}"
 
     test:
       baseUrl: "https://thinking-tester-contact-list.herokuapp.com"
       timeout: 7000
       logRequests: true
       auth:
+        login: "${TEST_USER:test_user}"
+        password: "${TEST_PASSWORD:test_password}"
         token: "${TEST_TOKEN}"
 
     prod:
@@ -20,4 +24,6 @@
       timeout: 10000
       logRequests: false
       auth:
+        login: "${PROD_USER:prod_user}"
+        password: "${PROD_PASSWORD:prod_password}"
         token: "${PROD_TOKEN}"

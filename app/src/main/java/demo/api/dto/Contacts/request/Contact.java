@@ -1,11 +1,12 @@
-package demo.api.dto;
+package demo.api.dto.Contacts.request;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record Contact(
         String firstName,
         String lastName,
-        Date birthdate,
+        String birthdate,
         String email,
         String phone,
         String street1,

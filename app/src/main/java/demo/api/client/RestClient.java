@@ -1,8 +1,10 @@
 package demo.api.client;
 
 import demo.api.config.Config;
+import demo.api.services.Users;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.parsing.Parser;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.filter.log.ErrorLoggingFilter;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -16,6 +18,7 @@ public class RestClient {
     public static RequestSpecification getRequestSpec() {
 
         if (requestSpec == null) {
+            RestAssured.defaultParser = Parser.JSON;
             requestSpec = new RequestSpecBuilder()
                     .setBaseUri(Config.getBaseUrl())
                     .setContentType(ContentType.JSON)
@@ -24,7 +27,8 @@ public class RestClient {
                             .httpClient(HttpClientConfig.httpClientConfig()
                                     .setParam("http.connection.timeout", Config.getTimeout())
                                     .setParam("http.socket.timeout", Config.getTimeout())))
-                    .addFilter(new ErrorLoggingFilter()) 
+                    .setAuth(RestAssured.oauth2(Config.getAuthToken()))
+                    .addFilter(new ErrorLoggingFilter())
                     .addFilter(new RequestLoggingFilter())
                     .addFilter(new ResponseLoggingFilter())
                     .build();

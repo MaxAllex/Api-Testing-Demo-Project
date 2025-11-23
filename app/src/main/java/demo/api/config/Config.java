@@ -59,6 +59,16 @@ public class Config {
         return resolveEnv((String) auth.get("token"));
     }
 
+    public static String getAuthLogin() {
+        Map<String, Object> auth = MAPPER.convertValue(profileCfg.get("auth"), new TypeReference<Map<String, Object>>() {});
+        return resolveEnv((String) auth.get("login"));
+    }
+
+    public static String getAuthPassword() {
+        Map<String, Object> auth = MAPPER.convertValue(profileCfg.get("auth"), new TypeReference<Map<String, Object>>() {});
+        return resolveEnv((String) auth.get("password"));
+    }
+
     private static String resolveEnv(String value) {
         if (value == null) return "";
 

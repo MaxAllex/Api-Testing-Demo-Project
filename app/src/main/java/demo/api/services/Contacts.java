@@ -2,11 +2,12 @@ package demo.api.services;
 
 import java.util.List;
 
+import demo.api.dto.Contacts.request.Contact;
 import io.restassured.response.Response;
+
 import static io.restassured.RestAssured.given;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.common.mapper.TypeRef;
-import demo.api.dto.Contact;
 
 public class Contacts {
     private RequestSpecification spec;
@@ -23,23 +24,28 @@ public class Contacts {
                 .post("/contacts");
     }
 
-    public List<Contact> getContacts() {
+    public List<demo.api.dto.Contacts.response.Contact> getContacts() {
         return given()
                 .spec(spec)
                 .when()
                 .get("/contacts/")
                 .then()
                 .extract()
-                .as(new TypeRef<List<Contact>>() {});
+                .as(new TypeRef<List<demo.api.dto.Contacts.response.Contact>>() {
+                });
     }
 
-    public Contact getContact() {
+    public Response getContact(String contactId) {
+        return given()
+            .spec(spec)
+            .when()
+            .get("/contacts/" + contactId);
+            
+    }
+
+    public Response deleteContact(String contactId) {
         return given()
                 .spec(spec)
                 .when()
-                .get("/contacts")
-                .then()
-                .extract()
-                .as(Contact.class);
-    }
+                .delete("/contacts/" + contactId);}
 }
